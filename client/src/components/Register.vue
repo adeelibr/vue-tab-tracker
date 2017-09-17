@@ -1,24 +1,33 @@
 <template>
-  <div>
-    <h1>Register</h1>
-    <input 
-      type="email"
-      name="email"
-      v-model="email"
-      placeholder="Enter your email"
-    />
-    <input 
-      type="password"
-      name="password"
-      v-model="password"
-      placeholder="Enter your password"
-    />
-    <button 
-      @click="register"
-    >
-      Register
-    </button>
-  </div>
+  <v-layout column>
+    <v-flex xs6 offset-xs3>
+      <div class="white elevation-2">
+        <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar-title>Register</v-toolbar-title>
+        </v-toolbar>
+        <section class="pl-4 pr-4 pt-2 pt-2">
+          <v-text-field 
+            type="email"
+            name="email"
+            label="Email"
+            v-model="email"
+            placeholder="Enter your email"
+          />
+          <v-text-field 
+            type="password"
+            name="password"
+            label="Password"
+            v-model="password"
+            placeholder="Enter your password"
+          />
+          <div v-html="error" class="error"></div>
+          <v-btn class="cyan" @click="register">
+            Register
+          </v-btn>
+        </section>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -27,16 +36,20 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: null
     }
   },
   methods: {
     async register () {
-      const response = await AuthenticationService.register({
-        email: this.email,
-        password: this.password
-      })
-      console.log('register button was clicked', response.data)
+      try {
+        await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
@@ -44,4 +57,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .error {
+    background-color: white;
+    margin: 20px;
+  }
 </style>
