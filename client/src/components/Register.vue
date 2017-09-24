@@ -5,7 +5,7 @@
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
-        <section class="pl-4 pr-4 pt-2 pt-2">
+        <section class="pl-4 pr-4 pt-2 pb-2">
           <v-text-field 
             type="email"
             name="email"
