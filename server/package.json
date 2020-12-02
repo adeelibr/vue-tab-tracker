@@ -16,7 +16,7 @@
     "joi": "^11.0.1",
     "morgan": "^1.8.2",
     "nodemon": "^1.12.1",
-    "sequelize": "^4.8.4",
+    "sequelize": "^5.15.1",
     "sqlite3": "^3.1.11"
   },
   "devDependencies": {
